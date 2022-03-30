@@ -1,5 +1,7 @@
 package com.home.play.authorization;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 
 import org.springframework.stereotype.Component;
@@ -19,5 +21,9 @@ public class UserDAO {
     @Transactional(propagation = Propagation.REQUIRED)
     public void save(User user) {
         entityManager.persist(user);
+    }
+
+    public List<User> findAll() {
+        return entityManager.createQuery("select u from User u", User.class).getResultList();
     }
 }

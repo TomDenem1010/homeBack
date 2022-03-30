@@ -1,9 +1,14 @@
 package com.home.play.authorization;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import javax.transaction.Transactional;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+@Transactional
 @SpringBootTest
 public class RoleDAOTest {
 
@@ -12,7 +17,17 @@ public class RoleDAOTest {
 
     @Test
     void testSaveRole() {
-        Role role = new Role("teszt");
+        int oldSize = getRoleListSize();
+
+        Role role = new Role("tesztgdísgsíg");
         roleDAO.save(role);
+
+        int newSize = getRoleListSize();
+
+        assertThat(oldSize + 1).isEqualTo(newSize);
+    }
+
+    private int getRoleListSize() {
+        return roleDAO.findAll().size();
     }
 }

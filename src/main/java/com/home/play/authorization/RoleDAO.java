@@ -1,5 +1,7 @@
 package com.home.play.authorization;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 
 import org.springframework.stereotype.Component;
@@ -19,5 +21,9 @@ public class RoleDAO{
     @Transactional(propagation = Propagation.REQUIRED)
     public void save(Role role) {
         entityManager.persist(role);
+    }
+
+    public List<Role> findAll() {
+        return entityManager.createQuery("select r from Role r", Role.class).getResultList();
     }
 }
