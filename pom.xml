@@ -36,6 +36,16 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.pitest</groupId>
+			<artifactId>pitest</artifactId>
+			<version>1.7.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.pitest</groupId>
+			<artifactId>pitest-junit5-plugin</artifactId>
+			<version>0.15</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -44,6 +54,15 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>org.pitest</groupId>
+				<artifactId>pitest-maven</artifactId>
+				<configuration>
+					<excludedClasses>
+						<excludedClass>com.home.play.authorization.entity.*</excludedClass>
+					</excludedClasses>
+				</configuration>
+			 </plugin>
 		</plugins>
 	</build>
 
