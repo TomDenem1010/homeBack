@@ -28,4 +28,14 @@ public class UserDAO {
     public List<User> findAll() {
         return entityManager.createQuery("select u from User u", User.class).getResultList();
     }
+
+    public List<User> findByNameAndPassword(String name, String password) {
+        return entityManager.createQuery(
+            "select u from User u where " + 
+                "u.name = :name_param and " +
+                "u.password = :password_param", User.class)
+                    .setParameter("name_param", name)
+                    .setParameter("password_param", password)
+                    .getResultList();
+    }
 }

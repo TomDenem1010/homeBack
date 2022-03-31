@@ -28,4 +28,8 @@ public class RoleDAO{
     public List<Role> findAll() {
         return entityManager.createQuery("select r from Role r", Role.class).getResultList();
     }
+
+    public List<Role> findByName(String name) {
+        return entityManager.createQuery("select r from Role r where r.name = :name_param", Role.class).setParameter("name_param", name) .getResultList();
+    }
 }
