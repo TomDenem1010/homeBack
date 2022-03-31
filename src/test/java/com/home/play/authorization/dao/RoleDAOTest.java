@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import javax.transaction.Transactional;
 
-import com.home.play.authorization.dao.RoleDAO;
 import com.home.play.authorization.entity.Role;
 
 import org.junit.jupiter.api.Test;
