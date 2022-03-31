@@ -1,8 +1,10 @@
-package com.home.play.authorization;
+package com.home.play.authorization.dao;
 
 import java.util.List;
 
 import javax.persistence.EntityManager;
+
+import com.home.play.authorization.entity.Role;
 
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;

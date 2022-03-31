@@ -1,4 +1,4 @@
-package com.home.play.authorization;
+package com.home.play.authorization.entity;
 
 import javax.persistence.*;
 
