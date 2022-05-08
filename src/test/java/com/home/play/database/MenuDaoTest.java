@@ -16,7 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class MenuDaoTest {
     
     private static final String NAME = "NAME";
-    private static final String PATH = "\\PATH";
+    private static final String PATH = "PATH";
     private static final int ORDER = 000;
 
     @Autowired
