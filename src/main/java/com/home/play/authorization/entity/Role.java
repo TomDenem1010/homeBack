@@ -2,8 +2,6 @@ package com.home.play.authorization.entity;
 
 import javax.persistence.*;
 
-import javax.persistence.Table;
-
 @Entity
 @Table(name="role")
 public class Role {
