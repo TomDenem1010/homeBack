@@ -1,6 +1,6 @@
 package com.home.play.database.user.dao;
 
-import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 
@@ -25,13 +25,14 @@ public class UserDao {
         entityManager.persist(user);
     }
 
-    public List<UserEntity> findByNameAndPassword(String name, String password) {
+    public Optional<UserEntity> findByNameAndPassword(String name, String password) {
         return entityManager.createQuery(
             "select u from UserEntity u where " + 
                 "u.name = :name_param and " +
                 "u.password = :password_param", UserEntity.class)
                     .setParameter("name_param", name)
                     .setParameter("password_param", password)
-                    .getResultList();
+                    .getResultStream()
+                    .findFirst();
     }
 }
