@@ -1,7 +1,5 @@
 package com.home.play.database.accesstoken.dao;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
 
 import com.home.play.database.accesstoken.entity.AccessTokenEntity;
@@ -23,17 +21,4 @@ public class AccessTokenDao {
     public void save(AccessTokenEntity token) {
         entityManager.persist(token);
     }
-
-    public List<AccessTokenEntity> findAll() {
-        return entityManager.createQuery("select t from AccessTokenEntity t", AccessTokenEntity.class).getResultList();
-    }
-
-    public List<AccessTokenEntity> findBySecret(String secret) {
-        return entityManager.createQuery(
-            "select t from AccessTokenEntity t where " + 
-                "t.secret = :secret_param", AccessTokenEntity.class)
-                    .setParameter("secret_param", secret)
-                    .getResultList();
-    }
-
 }

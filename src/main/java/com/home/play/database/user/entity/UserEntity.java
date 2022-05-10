@@ -19,10 +19,10 @@ public class UserEntity {
 
     private String password;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.MERGE)
     private List<RoleEntity> role;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.MERGE)
     private AccessTokenEntity accessToken;
 
     public UserEntity(String name, String password, List<RoleEntity> role, AccessTokenEntity accessToken) {

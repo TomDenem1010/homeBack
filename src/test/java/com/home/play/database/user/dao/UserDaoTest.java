@@ -8,7 +8,9 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import com.home.play.database.accesstoken.dao.AccessTokenDao;
 import com.home.play.database.accesstoken.entity.AccessTokenEntity;
+import com.home.play.database.role.dao.RoleDao;
 import com.home.play.database.role.entity.RoleEntity;
 import com.home.play.database.user.entity.UserEntity;
 
@@ -21,31 +23,41 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class UserDaoTest {
 
     private static final String ROLE_NAME = "TesztRoleName";
-    private static final Timestamp TOKEN_FROM_TIME = Timestamp.valueOf(LocalDateTime.now());
-    private static final Timestamp TOKEN_TO_TIME = Timestamp.valueOf(LocalDateTime.now().plusMinutes(5));
-    private static final String TOKEN_SECRET = "TesztAccessTokenSecret";
+    private static final Timestamp TOKEN_START_TIME = Timestamp.valueOf(LocalDateTime.now());
+    private static final Timestamp TOKEN_END_TIME = Timestamp.valueOf(LocalDateTime.now().plusMinutes(5));
     private static final String USER_NAME = "TesztUserName";
     private static final String USER_PASSWORD = "TesztUserPassword";
+
     @Autowired
     UserDao userDao;
 
+    @Autowired
+    RoleDao roleDao;
+
+    @Autowired
+    AccessTokenDao accessTokenDao;
+
     @Test
     void testSave() {
-        int oldSize = getUserListSize();
         RoleEntity role = new RoleEntity(ROLE_NAME);
-        AccessTokenEntity accessToken = new AccessTokenEntity(TOKEN_FROM_TIME, TOKEN_TO_TIME, TOKEN_SECRET);
-        UserEntity user = new UserEntity(USER_NAME, USER_PASSWORD, List.of(role), accessToken);
+        roleDao.save(role);
 
+        AccessTokenEntity accessToken = new AccessTokenEntity(TOKEN_START_TIME, TOKEN_END_TIME);
+        accessTokenDao.save(accessToken);
+
+        UserEntity user = new UserEntity(USER_NAME, USER_PASSWORD, List.of(role), accessToken);
         userDao.save(user);
 
-        int newSize = getUserListSize();
-        List<UserEntity> users = userDao.findByNameAndPassword(USER_NAME, USER_PASSWORD);
+        assertThat(user.getId()).isNotNull();
+        assertThat(user.getName()).isEqualTo(USER_NAME);
+        assertThat(user.getPassword()).isEqualTo(USER_PASSWORD);
 
-        assertThat(oldSize + 1).isEqualTo(newSize);
-        assertThat(users).isNotEmpty();
-    }
+        assertThat(user.getAccessToken().getId()).isNotNull();
+        assertThat(user.getAccessToken().getStart()).isEqualTo(TOKEN_START_TIME);
+        assertThat(user.getAccessToken().getEnd()).isEqualTo(TOKEN_END_TIME);
 
-    private int getUserListSize() {
-        return userDao.findAll().size();
+        assertThat(user.getRole().size()).isEqualTo(1);
+        assertThat(user.getRole().get(0).getId()).isNotNull();
+        assertThat(user.getRole().get(0).getName()).isEqualTo(ROLE_NAME);
     }
 }

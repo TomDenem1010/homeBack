@@ -34,7 +34,7 @@ public class MenuService {
             menuDtos.add(MenuResponseDto.Builder.newBuilder()
                 .withId(menuEntities.get(i).getId())
                 .withName(menuEntities.get(i).getName())
-                .withPath(menuEntities.get(i).getPathTo())
+                .withPath(menuEntities.get(i).getPath())
                 .withOrder(menuEntities.get(i).getOrder())
                 .build()
             );

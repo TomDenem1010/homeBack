@@ -2,8 +2,6 @@ package com.home.play.database.role.dao;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.List;
-
 import javax.transaction.Transactional;
 
 import com.home.play.database.role.entity.RoleEntity;
@@ -22,19 +20,10 @@ public class RoleDaoTest {
 
     @Test
     void testSaveRole() {
-        int oldSize = getRoleListSize();
         RoleEntity role = new RoleEntity(NAME);
-
         roleDAO.save(role);
 
-        int newSize = getRoleListSize();
-        List<RoleEntity> roles = roleDAO.findByName(NAME);
-
-        assertThat(oldSize + 1).isEqualTo(newSize);
-        assertThat(roles).isNotEmpty();
-    }
-
-    private int getRoleListSize() {
-        return roleDAO.findAll().size();
+        assertThat(role.getId()).isNotNull();
+        assertThat(role.getName()).isEqualTo(NAME);
     }
 }

@@ -16,12 +16,9 @@ public class AccessTokenEntity {
 
     private Timestamp end;
 
-    private String secret;
-
-    public AccessTokenEntity(Timestamp start, Timestamp end, String secret) {
+    public AccessTokenEntity(Timestamp start, Timestamp end) {
         this.start = start;
         this.end = end;
-        this.secret = secret;
     }
 
     public AccessTokenEntity() {
@@ -46,13 +43,4 @@ public class AccessTokenEntity {
     public void setEnd(Timestamp end) {
         this.end = end;
     }
-
-    public String getSecret() {
-        return secret;
-    }
-
-    public void setSecret(String secret) {
-        this.secret = secret;
-    }
-
 }

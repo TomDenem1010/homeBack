@@ -13,8 +13,8 @@ public class MenuEntity {
     @Column(name="name_to_display")
     private String name;
 
-    @Column(name="path_to_move")
-    private String pathTo;
+    @Column(name="path_to_link")
+    private String path;
     
     @Column(name="order_to_display")
     private int order;
@@ -22,9 +22,9 @@ public class MenuEntity {
     public MenuEntity() {
     }
 
-    public MenuEntity(String name, String pathTo, int order) {
+    public MenuEntity(String name, String path, int order) {
         this.name = name;
-        this.pathTo = pathTo;
+        this.path = path;
         this.order = order;
     }
 
@@ -40,12 +40,12 @@ public class MenuEntity {
         this.name = name;
     }
 
-    public String getPathTo() {
-        return pathTo;
+    public String getPath() {
+        return path;
     }
 
-    public void setPathTo(String pathTo) {
-        this.pathTo = pathTo;
+    public void setPath(String path) {
+        this.path = path;
     }
 
     public int getOrder() {

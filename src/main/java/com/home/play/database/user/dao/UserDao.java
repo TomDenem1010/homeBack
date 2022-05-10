@@ -25,10 +25,6 @@ public class UserDao {
         entityManager.persist(user);
     }
 
-    public List<UserEntity> findAll() {
-        return entityManager.createQuery("select u from UserEntity u", UserEntity.class).getResultList();
-    }
-
     public List<UserEntity> findByNameAndPassword(String name, String password) {
         return entityManager.createQuery(
             "select u from UserEntity u where " + 
