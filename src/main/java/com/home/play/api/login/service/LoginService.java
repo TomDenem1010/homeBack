@@ -55,6 +55,7 @@ public class LoginService {
                 Timestamp.valueOf(ZonedDateTime.now(ZoneId.of("Europe/Budapest")).plusMinutes(5).toLocalDateTime()));
         accessTokenDao.save(accessToken);
         user.setAccessToken(accessToken);
+        userDao.save(user);
     }
 
     private LoginResponse createSuccessResponse(UserEntity user) {
